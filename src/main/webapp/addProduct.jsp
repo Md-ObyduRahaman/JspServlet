@@ -19,6 +19,11 @@
         <jsp:directive.include file="navbar.jsp" />
 
         <div class="container">
+            <% if (request.getAttribute("flag") == "saved") { %>
+            <p style="color: green;"><%= request.getAttribute("message") %></p>
+            <% } else if (request.getAttribute("flag") == "notsaved"){ %>
+            <p style="color: red;"><%= request.getAttribute("message") %></p>
+            <% } %>
             <h2>Product Submission Form</h2>
             <form action="addProductServlet" method="post">
                 <div class="form-group">

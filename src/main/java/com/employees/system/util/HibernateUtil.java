@@ -1,6 +1,7 @@
 package com.employees.system.util;
 
 
+import com.employees.system.model.Product;
 import com.employees.system.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -36,11 +37,12 @@ public class HibernateUtil {
 
 				settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-				//settings.put(Environment.HBM2DDL_AUTO, "update");
+				settings.put(Environment.HBM2DDL_AUTO, "update");
 
 
 				configuration.setProperties(settings);
 				configuration.addAnnotatedClass(User.class);
+				configuration.addAnnotatedClass(Product.class);
 
 				ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 						.applySettings(configuration.getProperties()).build();

@@ -15,19 +15,17 @@ public class Product {
     private Integer price;
     private Integer quantity;
 
-    @Column(name = "product_id")
-    Long productId;
+    Long user_id;
 
     public Product() {
     }
 
-    public Product(String productName, String description, Integer price, Integer quantity, Long productId) {
-        this.id = id;
+    public Product(String productName, String description, Integer price, Integer quantity, Long user_id) {
         this.productName = productName;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
-        this.productId = productId;
+        this.user_id = user_id;
     }
 
     public Long getId() {
@@ -71,11 +69,11 @@ public class Product {
     }
 
     public Long getProductId() {
-        return productId;
+        return user_id;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProductId(Long user_id) {
+        this.user_id = user_id;
     }
 
     @Override
@@ -86,7 +84,7 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
-                ", productId=" + productId +
+                ", user_id=" + user_id +
                 '}';
     }
 }
