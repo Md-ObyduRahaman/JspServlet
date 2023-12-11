@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/login")
@@ -21,9 +22,13 @@ public class LoginServlet extends HttpServlet {
         loginDao = new LoginDao();
     }
 
+  //This doGet method use for logout purpose
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Sojib");
+        HttpSession session = req.getSession();
+        session.invalidate(); // Invalidate the session, clearing all session attributes
+
+
         resp.sendRedirect("index.jsp");    }
 
 
@@ -34,6 +39,10 @@ public class LoginServlet extends HttpServlet {
 
         User user= loginDao.getUser(username,password);
         if (user != null) {
+            HttpSession session=request.getSession();
+            session.setAttribute("userName", user.getName());
+            session.setAttribute("userId", user.getId());
+
             request.setAttribute("errorMessage","");
             resp.sendRedirect("dashBoard.jsp");
         }else {

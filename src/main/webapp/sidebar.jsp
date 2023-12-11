@@ -2,7 +2,9 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Bootstrap Sidebar</h3>
+            <% String name=(String) session.getAttribute("userName"); %>
+
+            <h3 style="color: brown">Wellcome <%= name %></h3>
         </div>
 
         <ul class="list-unstyled components">
@@ -22,7 +24,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">About</a>
+                <a href="addProduct.jsp">Add Product</a>
             </li>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
@@ -39,10 +41,10 @@
                 </ul>
             </li>
             <li>
-                <a href="#">Portfolio</a>
+                <a href="showProduct.jsp">Product List</a>
             </li>
             <li>
-                <a href="#">Contact</a>
+                <a href="login">Logout</a>
             </li>
         </ul>
 

@@ -36,7 +36,8 @@ public class HibernateUtil {
 
 				settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-				settings.put(Environment.HBM2DDL_AUTO, "update");
+				//settings.put(Environment.HBM2DDL_AUTO, "update");
+
 
 				configuration.setProperties(settings);
 				configuration.addAnnotatedClass(User.class);
