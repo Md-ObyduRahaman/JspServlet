@@ -28,6 +28,15 @@ public class Product {
         this.user_id = user_id;
     }
 
+    public Product(Long id, String productName, String description, Integer price, Integer quantity,Long user_id) {
+        this.id = id;
+        this.productName = productName;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.user_id = user_id;
+    }
+
     public Long getId() {
         return id;
     }

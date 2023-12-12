@@ -1,4 +1,4 @@
-
+<%@ page import="com.employees.system.model.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -32,19 +32,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Example table row -->
-                <tr>
-                    <td>1</td>
-                    <td>Product 1</td>
-                    <td>Description of Product 1</td>
-                    <td>$10.00</td>
-                    <td>5</td>
+                <%
+                    // Retrieve the listUser attribute from the request object
+                    java.util.List<Product> productList = (java.util.List<Product>) request.getAttribute("productList");
+
+                    // Iterate through the listUser
+                    if(productList != null) {
+                        for(Product product : productList) {
+                %>                <tr>
+                    <td><%= product.getId() %></td>
+                    <td><%= product.getProductName() %></td>
+                    <td><%= product.getDescription() %></td>
+                    <td><%= product.getPrice() %></td>
+                    <td><%= product.getQuantity() %></td>
+
                     <td>
-                        <a href="EditProductServlet?id=1" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="DeleteProductServlet?id=1" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="edit?id=<%= product.getId() %>" class="btn btn-primary btn-sm">Edit</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="delete?id=<%= product.getId() %>" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
-                <!-- Add more rows dynamically -->
+                <%
+                        }
+                    }
+                %>
                 </tbody>
             </table>
         </div>

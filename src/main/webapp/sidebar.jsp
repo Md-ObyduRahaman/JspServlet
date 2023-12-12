@@ -41,7 +41,7 @@
                 </ul>
             </li>
             <li>
-                <a href="showProduct.jsp">Product List</a>
+                <a href="ProjectStudent_war">Product List</a>
             </li>
             <li>
                 <a href="login">Logout</a>

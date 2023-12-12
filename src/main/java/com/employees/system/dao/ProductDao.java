@@ -6,6 +6,7 @@ import com.employees.system.model.User;
 import com.employees.system.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -41,20 +42,25 @@ public class ProductDao {
 	 * Update User
 	 * @param user
 	 */
-	public void updateUser(User user) {
+	public Boolean updateUser(Product product) {
 		Transaction transaction = null;
+		Boolean flag = false;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			// start a transaction
 			transaction = session.beginTransaction();
 			// save the student object
-			session.update(user);
+			session.update(product);
 			// commit transaction
 			transaction.commit();
+			flag = true;
 		} catch (Exception e) {
 			if (transaction != null) {
 				transaction.rollback();
+				return flag;
 			}
 			e.printStackTrace();
+		}finally {
+			return flag;
 		}
 	}
 
@@ -62,7 +68,7 @@ public class ProductDao {
 	 * Delete User
 	 * @param id
 	 */
-	public void deleteUser(int id) {
+	public void deleteUser(Long id) {
 
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -70,9 +76,9 @@ public class ProductDao {
 			transaction = session.beginTransaction();
 
 			// Delete a user object
-			User user = session.get(User.class, id);
-			if (user != null) {
-				session.delete(user);
+			Product product = session.get(Product.class, id);
+			if (product != null) {
+				session.delete(product);
 				System.out.println("user is deleted");
 			}
 
@@ -91,41 +97,47 @@ public class ProductDao {
 	 * @param id
 	 * @return
 	 */
-	public User getUser(int id) {
-
-		Transaction transaction = null;
-		User user = null;
+	public Product getUser(Long id) {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			// start a transaction
-			transaction = session.beginTransaction();
-			// get an user object
-			user = session.get(User.class, id);
-			// commit transaction
-			transaction.commit();
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
+			Transaction transaction = null;
+			Product product = null;
+			try {
+				transaction = session.beginTransaction();
+
+				// Fetch the product by its ID
+				product = session.get(Product.class, id);
+
+				transaction.commit();
+			} catch (Exception e) {
+				if (transaction != null) {
+					transaction.rollback();
+				}
+				e.printStackTrace();
 			}
+			return product;
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return user;
+		return null;
 	}
+
 
 	/**
 	 * Get all Users
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<User> getAllUser() {
-
+	public List<Product> getAllUser(Long userId) {
 		Transaction transaction = null;
-		List<User> listOfUser = null;
+		List<Product> listOfUser = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			// start a transaction
 			transaction = session.beginTransaction();
-			// get an user object
 
-			listOfUser = session.createQuery("from User").getResultList();
+			// Updated query to include parameter binding
+			listOfUser = session.createQuery("FROM Product WHERE user_id = :userId", Product.class)
+					.setParameter("userId", userId)
+					.getResultList();
 
 			// commit transaction
 			transaction.commit();
@@ -137,4 +149,5 @@ public class ProductDao {
 		}
 		return listOfUser;
 	}
+
 }

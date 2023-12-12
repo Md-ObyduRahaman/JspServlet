@@ -10,6 +10,6 @@ CREATE TABLE Product (
                          description VARCHAR(255),
                          price INT,
                          quantity INT,
-                         user_id BIGINT,
-                         FOREIGN KEY (user_id) REFERENCES UserInfo(id) NOT NULL
+                         user_id BIGINT NOT NULL,
+                         FOREIGN KEY (user_id) REFERENCES UserInfo(id)
 );
