@@ -38,23 +38,18 @@ public class ProductListServlet extends HttpServlet {
 
 		try {
 			switch (action) {
-			case "/new":
-				showNewForm(request, response);
-				break;
-			case "/insert":
-				//insertUser(request, response);
-				break;
+
 			case "/delete":
-				deleteUser(request, response,user_id);
+				deleteProduct(request, response,user_id);
 				break;
 			case "/edit":
 				showEditForm(request, response,user_id);
 				break;
 			case "/update":
-				updateUser(request, response,user_id);
+				updateProduct(request, response,user_id);
 				break;
 			default:
-				listUser(request, response,user_id);
+				listProduct(request, response,user_id);
 				break;
 			}
 		} catch (SQLException ex) {
@@ -62,7 +57,7 @@ public class ProductListServlet extends HttpServlet {
 		}
 	}
 
-	private void listUser(HttpServletRequest request, HttpServletResponse response,Long user_id)
+	private void listProduct(HttpServletRequest request, HttpServletResponse response,Long user_id)
 			throws SQLException, IOException, ServletException {
 
 		List<Product> productList = productDao.getAllUser(user_id);
@@ -71,11 +66,7 @@ public class ProductListServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
-		dispatcher.forward(request, response);
-	}
+
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response,Long user_id)
 			throws SQLException, ServletException, IOException {
@@ -89,7 +80,7 @@ public class ProductListServlet extends HttpServlet {
 
 
 
-	private void updateUser(HttpServletRequest request, HttpServletResponse resp,Long user_id)
+	private void updateProduct(HttpServletRequest request, HttpServletResponse resp,Long user_id)
 			throws SQLException, IOException, ServletException {
 		Long id = Long.valueOf(request.getParameter("id"));
 		String productName = request.getParameter("productName");
@@ -114,10 +105,10 @@ public class ProductListServlet extends HttpServlet {
 		}
 	}
 
-	private void deleteUser(HttpServletRequest request, HttpServletResponse response,Long user_id)
+	private void deleteProduct(HttpServletRequest request, HttpServletResponse response,Long user_id)
 			throws SQLException, IOException, ServletException {
 		Long id = Long.valueOf(request.getParameter("id"));
 		productDao.deleteUser(id);
-		listUser(request,response,user_id);
+		listProduct(request,response,user_id);
 	}
 }

@@ -36,11 +36,13 @@
                     // Retrieve the listUser attribute from the request object
                     java.util.List<Product> productList = (java.util.List<Product>) request.getAttribute("productList");
 
+                    int i=1;
                     // Iterate through the listUser
                     if(productList != null) {
                         for(Product product : productList) {
                 %>                <tr>
-                    <td><%= product.getId() %></td>
+                    <td><%= i %></td>
+                    <%= i=i+1 %>
                     <td><%= product.getProductName() %></td>
                     <td><%= product.getDescription() %></td>
                     <td><%= product.getPrice() %></td>

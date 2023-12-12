@@ -2,11 +2,9 @@ package com.employees.system.dao;
 
 
 import com.employees.system.model.Product;
-import com.employees.system.model.User;
 import com.employees.system.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -29,19 +27,14 @@ public class ProductDao {
 				return flag;
 			}
 			e.printStackTrace();
-			// Set flag to false in case of an exception
 			flag = false;
 		}finally {
 			return flag;
 		}
-	//	return flag;
 	}
 
 
-	/**
-	 * Update User
-	 * @param user
-	 */
+
 	public Boolean updateUser(Product product) {
 		Transaction transaction = null;
 		Boolean flag = false;
@@ -64,10 +57,7 @@ public class ProductDao {
 		}
 	}
 
-	/**
-	 * Delete User
-	 * @param id
-	 */
+
 	public void deleteUser(Long id) {
 
 		Transaction transaction = null;
@@ -92,11 +82,7 @@ public class ProductDao {
 		}
 	}
 
-	/**
-	 * Get User By ID
-	 * @param id
-	 * @return
-	 */
+
 	public Product getUser(Long id) {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			Transaction transaction = null;
@@ -122,11 +108,7 @@ public class ProductDao {
 	}
 
 
-	/**
-	 * Get all Users
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
+
 	public List<Product> getAllUser(Long userId) {
 		Transaction transaction = null;
 		List<Product> listOfUser = null;
