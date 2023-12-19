@@ -15,6 +15,8 @@ public class Product {
     private Integer price;
     private Integer quantity;
 
+
+    @Column(name = "product_id")
     Long user_id;
 
     public Product() {

@@ -8,6 +8,8 @@
 
     <!-- Bootstrap JS -->
     <title>DashBoard</title>
+    <jsp:directive.include file="style.jsp" />
+
 </head>
 <body>
 <div class="wrapper">

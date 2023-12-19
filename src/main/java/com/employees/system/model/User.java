@@ -29,6 +29,10 @@ public class User {
 	@Column(name="password")
 	protected String password;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "product_id", referencedColumnName = "id")
+	Set<Product> products = new HashSet<>();
+
 
 
 	public User() {
